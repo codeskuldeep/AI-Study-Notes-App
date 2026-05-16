@@ -11,7 +11,7 @@ from core.permissions import IsOwner
 from services.ai_service import ai_service
 from .models import Note
 from .serializers import NoteSerializer, NoteListSerializer, GenerateNoteSerializer, NoteUpdateSerializer
-from .tasks import generate_note_async
+
 
 logger = logging.getLogger(__name__)
 
@@ -79,11 +79,15 @@ class NoteViewSet(SuccessResponseMixin, UserFilterMixin, ModelViewSet):
             tags=data.get('tags', []),
         )
 
-        # Queue async generation
-        generate_note_async.delay(
-            str(note.id), content, data['note_type'],
-            data.get('topic', ''), data.get('level', 'undergraduate')
+        generated = ai_service.generate_notes(
+            content,
+            data['note_type'],
+            data.get('topic', ''),
+            data.get('level', 'undergraduate')
         )
+
+        note.generated_content = generated
+        note.save()
 
         return self.created_response(
             data=NoteSerializer(note).data,
@@ -103,9 +107,21 @@ class NoteViewSet(SuccessResponseMixin, UserFilterMixin, ModelViewSet):
     @action(detail=True, methods=['get'], url_path='regenerate')
     def regenerate(self, request, pk=None):
         note = self.get_object()
+
         if not note.raw_content:
-            return Response({'error': {'message': 'No source content to regenerate from.'}}, status=400)
-        generate_note_async.delay(
-            str(note.id), note.raw_content, note.note_type, note.topic, 'undergraduate'
+            return Response(
+                {'error': {'message': 'No source content to regenerate from.'}},
+                status=400
+            )
+
+        generated = ai_service.generate_notes(
+            note.raw_content,
+            note.note_type,
+            note.topic,
+            'undergraduate'
         )
-        return self.success_response(message='Regeneration started.')
+
+        note.generated_content = generated
+        note.save()
+
+        return self.success_response(message='Regeneration completed.')
