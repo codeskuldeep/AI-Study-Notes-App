@@ -14,8 +14,8 @@ class AppConstants {
   static const String onboardingKey = 'onboarding_done';
 
   // API
-  static const String baseUrl = 'http://192.168.29.204:8000/api/v1';
-  static const Duration connectTimeout = Duration(seconds: 30);
+  static const String baseUrl = 'https://ai-study-notes-app.onrender.com/api/v1';
+  static const Duration connectTimeout = Duration(seconds: 60);
   static const Duration receiveTimeout = Duration(seconds: 60);
 
   // Pagination
