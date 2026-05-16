@@ -1,0 +1,67 @@
+# Core Django
+Django==4.2.16
+djangorestframework==3.15.2
+djangorestframework-simplejwt==5.3.1
+django-cors-headers==4.4.0
+django-filter==24.3
+django-environ==0.11.2
+psycopg2-binary==2.9.9
+gunicorn==22.0.0
+whitenoise==6.7.0
+
+# Authentication
+social-auth-app-django==5.4.2
+social-auth-core==4.5.4
+google-auth==2.35.0
+google-auth-oauthlib==1.2.1
+
+# Async & Caching
+celery==5.4.0
+redis==5.1.1
+django-redis==5.4.0
+kombu==5.3.7
+
+# AI & ML
+openai==1.54.4
+google-generativeai==0.8.3
+anthropic==0.36.2
+langchain==0.3.7
+langchain-openai==0.2.6
+
+# OCR & Document Processing
+Pillow==10.4.0
+pytesseract==0.3.13
+pdf2image==1.17.0
+PyPDF2==3.0.1
+pypdf==5.0.1
+pdfplumber==0.11.4
+
+# File Storage
+django-storages==1.14.4
+boto3==1.35.36
+
+# API & Serialization
+drf-spectacular==0.27.2
+drf-nested-routers==0.93.5
+
+# Security
+cryptography==43.0.1
+django-ratelimit==4.1.0
+
+# Utilities
+python-dotenv==1.0.1
+requests==2.32.3
+Markdown==3.7
+python-dateutil==2.9.0
+django-extensions==3.2.3
+django-cleanup==8.1.0
+
+# Testing
+pytest==8.3.3
+pytest-django==4.9.0
+factory-boy==3.3.1
+faker==30.8.0
+
+# Monitoring
+sentry-sdk==2.17.0
+django-health-check==3.18.3

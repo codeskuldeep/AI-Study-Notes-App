@@ -1,0 +1,28 @@
+# Flutter
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+.pub/
+pubspec.lock
+
+# Android
+android/app/google-services.json
+android/.gradle/
+android/local.properties
+android/key.properties
+*.jks
+
+# iOS
+ios/Pods/
+ios/.symlinks/
+ios/Runner/GoogleService-Info.plist
+*.xcworkspace
+
+# Environment
+.env
+
+# IDE
+.idea/
+.vscode/
